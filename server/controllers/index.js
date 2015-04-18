@@ -5,14 +5,30 @@ var bluebird = require('bluebird');
 
 module.exports = {
   messages: {
-    get: function (req, res) {}, // a function which handles a get request for all messages
-    post: function (req, res) {} // a function which handles posting a message to the database
+    get: function (req, res) {
+      res.writeHead(200);
+      res.end();
+    },
+    post: function (req, res) {
+      var body = req.body; //express automatically parses JSON stringified object
+      models.messages.post(body, function(result){
+        res.writeHead(201);
+        res.end(result);
+      });
+    }
   },
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function (req, res) {
+      res.writeHead(200);
+      res.end();
+    },
+    post: function (req, res) {
+      res.writeHead(201);
+      res.end();
+    }
+
   }
 };
 
